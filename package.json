@@ -1,0 +1,28 @@
+{
+    "name": "monaca-template-minimum",
+    "version": "4.0.0",
+    "displayName": "Monaca Template Minimum",
+    "engines": {
+        "node": ">=18.16"
+    },
+    "dependencies": {
+        "monaca-plugin-monaca-core": "3.3.1",
+        "@havesource/cordova-plugin-push": "4.0.0",
+        "plugin.push.nifcloud": "file:res/custom_plugins/plugin.push.nifcloud"
+    },
+    "scripts": {
+        "monaca:preview": "npm run dev",
+        "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081"
+    },
+    "cordova": {
+        "plugins": {
+            "monaca-plugin-monaca-core": {},
+            "@havesource/cordova-plugin-push": {},
+            "plugin.push.nifcloud": {}
+        }
+    },
+    "devDependencies": {
+        "browser-sync": "~2.27.7",
+        "cordova": "^12.0.0"
+    }
+}

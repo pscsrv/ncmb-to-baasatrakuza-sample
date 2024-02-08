@@ -1,0 +1,30 @@
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${cordovaConfig.AGP_VERSION}"
+        classpath 'com.google.gms:google-services:4.3.4'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+    maven {
+        url "https://maven.google.com"
+    }
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation 'com.google.code.gson:gson:2.3.1'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+    implementation 'com.nifcloud.mbaas:ncmb_android:4.1.0'
+}

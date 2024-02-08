@@ -1,0 +1,29 @@
+{
+  "name": "ncmb-push-monaca-plugin",
+  "version": "3.2.2",
+  "description": "NIFCLOUD mobile backend Push Notification Plugin for Monaca",
+  "author": "NIFCLOUD mobile backend Team",
+  "license": "Apache License 2.0",
+  "homepage": "https://mbaas.nifcloud.com/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NIFCLOUD-mbaas/monaca_push_plugin"
+  },
+  "maintainers": [
+    {
+      "name": "NIFCLOUD mobile backend Team",
+      "url": "https://mbaas.nifcloud.com/support.htm"
+    }
+  ],
+  "tags": [
+    "mbaas",
+    "monaca",
+    "development",
+    "sdk",
+    "smartphone",
+    "tool",
+    "push",
+    "notification",
+    "cordova"
+  ]
+}

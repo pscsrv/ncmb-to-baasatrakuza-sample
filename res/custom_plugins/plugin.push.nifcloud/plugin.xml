@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  NIFCloud Mobile Backend Push Notification Plugin
+  Copyright 2017-2023 FUJITSU CLOUD TECHNOLOGIES LIMITED All Rights Reserved.
+
+  GooglePlayServices library
+  Copyright (c) 2013 The Chromium Authors. All rights reserved.
+-->
+<plugin
+    xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="plugin.push.nifcloud"
+    version="3.2.2">
+
+    <name>NIFCLOUDMB</name>
+    <description>NIFCLOUD Mobile Backend Push Notification Plugin</description>
+    <license>Copyright 2017-2023 FUJITSU CLOUD TECHNOLOGIES LIMITED All Rights Reserved.</license>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/ncmb.js" name="NifCloud">
+        <clobbers target="NCMB.monaca" />
+        <runs/>
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NcmbPushPlugin" >
+                <param name="android-package" value="plugin.push.nifcloud.NcmbPushPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+<!--        <config-file parent="/resources" target="res/values/strings.xml">-->
+<!--            <string name="google_app_id">@string/google_app_id</string>-->
+<!--        </config-file>-->
+<!--        <config-file parent="/resources" target="res/values/strings.xml">-->
+<!--            <string name="google_api_key">@string/google_api_key</string>-->
+<!--        </config-file>-->
+<!--        <config-file parent="/resources" target="res/values/strings.xml">-->
+<!--            <string name="project_id">@string/project_id</string>-->
+<!--        </config-file>-->
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+        </config-file>
+<!--        <config-file target="AndroidManifest.xml" parent="/manifest/application">-->
+<!--            <service-->
+<!--                android:name="com.nifcloud.mbaas.core.NCMBFirebaseMessagingService"-->
+<!--                android:exported="false">-->
+<!--                <intent-filter>-->
+<!--                    <action android:name="com.google.firebase.MESSAGING_EVENT"/>-->
+<!--                </intent-filter>-->
+<!--            </service>-->
+<!--            <meta-data android:name="openPushStartActivity" android:value=".MainActivity"/>-->
+<!--            <meta-data android:name="notificationOverlap" android:value="1"/>-->
+<!--        </config-file>-->
+        <framework src="ncmb.gradle" custom="true" type="gradleReference"/>
+        <source-file src="src/android/NcmbData.java" target-dir="src/plugin/push/nifcloud/" />
+        <source-file src="src/android/NcmbPushPlugin.java" target-dir="src/plugin/push/nifcloud/" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="NcmbPushPlugin">
+                <param name="ios-package" value="NcmbPushNotification"/>
+                <param name="onload" value="true"/>
+            </feature>
+        </config-file>
+        <config-file target="*-Debug.plist" parent="aps-environment">
+          <string>development</string>
+        </config-file>
+        <config-file target="*-Release.plist" parent="aps-environment">
+          <string>production</string>
+        </config-file>
+        <header-file src="src/ios/AppDelegate+NifCloud.h" />
+        <source-file src="src/ios/AppDelegate+NifCloud.m" />
+        <header-file src="src/ios/NcmbPushNotification.h" />
+        <source-file src="src/ios/NcmbPushNotification.m" />
+        <header-file src="src/ios/NcmbQueue.h" />
+        <source-file src="src/ios/NcmbQueue.m" />
+        <header-file src="src/ios/NCMB/NCMB.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMB.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMB_umbrella.h" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBACL.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBACL.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBAnalytics.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBAnalytics.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBAnonymousUtils.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBAnonymousUtils.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBConstants.h" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBDateFormat.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBDateFormat.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBError.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBError.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBFile.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBFile.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBGeoPoint.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBGeoPoint.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBInstallation.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBInstallation.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBObject+Subclass.h" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBObject.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBObject.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBPush.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBPush.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBQuery.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBQuery.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBReachability/NCMBReachability.h" target-dir="NCMB/NCMBReachability/" />
+        <source-file src="src/ios/NCMB/NCMBReachability/NCMBReachability.m" target-dir="NCMB/NCMBReachability/" />
+        <header-file src="src/ios/NCMB/NCMBRelation.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBRelation.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBRequest/NCMBRequest.h" target-dir="NCMB/NCMBRequest/" />
+        <source-file src="src/ios/NCMB/NCMBRequest/NCMBRequest.m" target-dir="NCMB/NCMBRequest/" />
+        <header-file src="src/ios/NCMB/NCMBRichPush/NCMBCloseImageView.h" target-dir="NCMB/NCMBRichPush/" />
+        <source-file src="src/ios/NCMB/NCMBRichPush/NCMBCloseImageView.m" target-dir="NCMB/NCMBRichPush/" />
+        <header-file src="src/ios/NCMB/NCMBRichPush/NCMBRichPushView.h" target-dir="NCMB/NCMBRichPush/" />
+        <source-file src="src/ios/NCMB/NCMBRichPush/NCMBRichPushView.m" target-dir="NCMB/NCMBRichPush/" />
+        <header-file src="src/ios/NCMB/NCMBRole.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBRole.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBScript.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBScript.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBScriptService/NCMBScriptService.h" target-dir="NCMB/NCMBScriptService/" />
+        <source-file src="src/ios/NCMB/NCMBScriptService/NCMBScriptService.m" target-dir="NCMB/NCMBScriptService/" />
+        <header-file src="src/ios/NCMB/NCMBSubclassing.h" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NCMBURLSession/NCMBURLSession.h" target-dir="NCMB/NCMBURLSession/" />
+        <source-file src="src/ios/NCMB/NCMBURLSession/NCMBURLSession.m" target-dir="NCMB/NCMBURLSession/" />
+        <header-file src="src/ios/NCMB/NCMBUser.h" target-dir="NCMB/" />
+        <source-file src="src/ios/NCMB/NCMBUser.m" target-dir="NCMB/" />
+        <header-file src="src/ios/NCMB/NSDataBase64Encode/NSDataBase64Encode.h" target-dir="NCMB/NCMBURLSession/" />
+        <source-file src="src/ios/NCMB/NSDataBase64Encode/NSDataBase64Encode.m" target-dir="NCMB/NCMBURLSession/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBAddOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBAddOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBAddUniqueOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBAddUniqueOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBDeleteOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBDeleteOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBIncrementOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBIncrementOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBRelationOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBRelationOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBRemoveOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBRemoveOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/Operations/NCMBSetOperation.h" target-dir="NCMB/Operations/" />
+        <source-file src="src/ios/NCMB/Operations/NCMBSetOperation.m" target-dir="NCMB/Operations/" />
+        <header-file src="src/ios/NCMB/PrivateHeaders/NCMBObject+Private.h" target-dir="NCMB/PrivateHeaders/" />
+        <header-file src="src/ios/NCMB/PrivateHeaders/NCMBQuery+Private.h" target-dir="NCMB/PrivateHeaders/" />
+        <header-file src="src/ios/NCMB/PrivateHeaders/NCMBRelation+Private.h" target-dir="NCMB/PrivateHeaders/" />
+        <header-file src="src/ios/NCMB/PrivateHeaders/NCMBUser+Private.h" target-dir="NCMB/PrivateHeaders/" />
+        <header-file src="src/ios/NCMB/SubClassHandler/SubClassHandler.h" target-dir="NCMB/SubClassHandler/" />
+        <source-file src="src/ios/NCMB/SubClassHandler/SubClassHandler.m" target-dir="NCMB/SubClassHandler/" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="UserNotifications.framework" />
+        <framework src="MobileCoreServices.framework" />
+    </platform>
+    <hook src="scripts/after_prepare.js" type="after_prepare" />
+</plugin>

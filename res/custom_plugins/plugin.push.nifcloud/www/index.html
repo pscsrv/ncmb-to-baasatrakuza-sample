@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="cordova.js"></script>
+    <script>                
+        // PhoneGap event handler
+        document.addEventListener("deviceready", onDeviceReady, false);
+        
+        function onDeviceReady(){
+
+            window.NCMB.monaca.setHandler
+    		(
+                function(jsonData){
+	                alert("callback :::" + JSON.stringify(jsonData));
+                }
+            );
+
+            window.NCMB.monaca.setDeviceToken(
+                                       "application_key",
+                                       "client_key"
+                                       );
+        }
+        
+        function getInstallationId() {
+            window.NCMB.monaca.getInstallationId(
+        		function(id) {
+        			alert("installationID is: " + id);
+        		}
+        	);
+        }
+                
+    </script>
+</head>
+<body>
+    
+    <h1>Ncmb Push Notification Starter</h1>
+    
+    <br/><br/>
+    <input type="button" onClick="getInstallationId()" value="getInstallationID" />
+    
+</body>
+</html>
